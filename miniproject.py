@@ -6,7 +6,16 @@ print("""
 """)
 
 book_list = "book_list.txt"
+
+def clearTerminal():
+
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')
+
 def addBook():
+    clearTerminal()
     book = input("Adding a book\nEnter book name: ")
     try:
         if os.path.exists(book_list):
@@ -34,6 +43,7 @@ def readBook():
         print(e)
 
 def deleteBook():
+    clearTerminal()
     print("**Deleting a Book")
     book = input("Enter Book Name: ")
     try: 
@@ -58,28 +68,33 @@ def deleteBook():
         print(e)
 
 
+print("List of books:\n")
+print(readBook())
 while True:
-    print("\nlist of books:\n")
-    print(readBook())
-    num = int(input("""
-Enter a number to use:
+    try:
+        num = int(input("""
 1 Add a book
 2 List all books
 3 Delete a book
+4 Clear Terminal
 0 Exit
 Enter a number: """))
+        if num > 4 or num < 0:
+            print("Invalid number selected")
 
-    if num > 3 or num < 0:
-        print("Invalid number selected")
-
-    if num == 0:
-        print("Thank you for using my book list application")
-        break  
-    if num == 1: 
-        addBook()
-    if num == 2:
-        print("\nlist of books:\n")
-        print(readBook())
-        print("\n")
-    if num == 3:
-        deleteBook()
+        if num == 0:
+            print("Thank you for using my book list application")
+            break  
+        if num == 1: 
+            addBook()
+        if num == 2:
+            print("List of books:\n")
+            print(readBook())
+            print("\n")
+        if num == 3:
+            deleteBook()
+        if num == 4:
+            clearTerminal()
+    except Exception as e: 
+        clearTerminal()
+        print("An Error has occured")
