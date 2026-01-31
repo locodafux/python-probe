@@ -1,9 +1,5 @@
 import os
 
-print("""
- 11. Mini Project 🎯
-**Console Book Manager**
-""")
 
 book_list = "book_list.txt"
 
@@ -15,19 +11,28 @@ def clearTerminal():
         _ = os.system('clear')
 
 def addBook():
+    #Done: avoid duplicates
     clearTerminal()
-    book = input("Adding a book\nEnter book name: ")
+
     try:
-        if os.path.exists(book_list):
-            content = readBook()
-            with open(book_list, 'a') as file:
-                if content != '':
-                    file.write('\n' + book)
-                else:
-                    file.write(book)
-        else:
+        book = input("Adding a book\nEnter book name: ")
+
+        if not os.path.exists(book_list):
             with open(book_list, 'w') as file:
                 file.write(book)
+            return
+
+        with open(book_list, 'r') as file:
+            books = file.read().splitlines()
+
+        if book in books:
+            print("Book " + book + " already exists")
+            return
+
+        content = readBook()
+        with open(book_list, 'a') as file:
+            file.write('\n' + book)
+
     except Exception as e: 
         print(e)
 
@@ -67,9 +72,19 @@ def deleteBook():
     except Exception as e:
         print(e)
 
+def showBooks():
+    print("List of books:")
+    if readBook() != "":
+        print(readBook())
+    else:
+        print("No books found.")
 
-print("List of books:\n")
-print(readBook())
+clearTerminal()
+print("""
+11. Mini Project
+**Console Book Manager**
+""")
+showBooks()
 while True:
     try:
         num = int(input("""
@@ -83,14 +98,13 @@ Enter a number: """))
             print("Invalid number selected")
 
         if num == 0:
-            print("Thank you for using my book list application")
+            print("Thank you for using my mini project")
             break  
         if num == 1: 
             addBook()
         if num == 2:
-            print("List of books:\n")
-            print(readBook())
-            print("\n")
+            clearTerminal()
+            showBooks()
         if num == 3:
             deleteBook()
         if num == 4:
