@@ -1,0 +1,9 @@
+{
+    "name": "Leo",
+    "age": 27,
+    "skills": [
+        "Python",
+        "FastAPI"
+    ],
+    "is_active": true
+}
