@@ -22,3 +22,9 @@ class BookManager:
             self.books = {}
 
 
+
+book1 = Book("Sample Book", "Sample Description", "Sample Author")
+
+print(vars(book1))
+
+
