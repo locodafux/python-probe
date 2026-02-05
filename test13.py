@@ -4,11 +4,10 @@ print("""### 13. Virtual Environments
 - Install packages inside venv
 """)
 
-#This is the command to creae a virtual environment in macos/linux
-python3 -m venv myfirstproject
-
-#To Activate the virtual environment in macos/linux
-source myfirstproject/bin/activate
+uv python install 3.13
+uv venv --python 3.13
+source .venv/bin/activate
+uv pip install -r requirements.txt
 
 #To deactivate the virtual environment just type
 deactivate

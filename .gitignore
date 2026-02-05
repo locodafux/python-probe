@@ -1,3 +1,4 @@
-myfirstproject/
+__pycache__/
+*.py[cod]
 # to ignore anywhere from the project 
 #**/temp/
